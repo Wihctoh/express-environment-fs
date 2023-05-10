@@ -13,6 +13,8 @@ function getEnvironmentById(id) {
 
   const filtered = arr.filter((el) => el.id == id);
 
+  if (!filtered.length) throw new Error("no have Data!");
+
   return filtered;
 }
 

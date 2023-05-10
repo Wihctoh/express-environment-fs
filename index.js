@@ -12,32 +12,48 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  const data = getAllenvironment();
+  try {
+    const data = getAllenvironment();
 
-  res.send(data);
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
 });
 
 app.get("/:id", (req, res) => {
-  const { id } = req.params;
-  const data = getEnvironmentById(id);
+  try {
+    const { id } = req.params;
+    const data = getEnvironmentById(id);
 
-  res.send(data);
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
 });
 
 app.post("/", (req, res) => {
-  const { label, category, priority } = req.body;
-  const data = createEnvironment(label, category, priority);
+  try {
+    const { label, category, priority } = req.body;
+    const data = createEnvironment(label, category, priority);
 
-  res.send(data);
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
 
 app.put("/:id", (req, res) => {
-  const { id } = req.params;
-  const { label, category, priority } = req.body;
+  try {
+    const { id } = req.params;
+    const { label, category, priority } = req.body;
 
-  const data = updateEnvironment(id, label, category, priority);
+    const data = updateEnvironment(id, label, category, priority);
 
-  res.send(data);
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
 
 app.listen(3000, () => {
