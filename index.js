@@ -17,6 +17,12 @@ app.get("/", (req, res) => {
   res.send(data);
 });
 
+app.get("/", (req, res) => {
+  const data = getAllenvironment();
+
+  res.send(data);
+});
+
 app.get("/:id", (req, res) => {
   const { id } = req.params;
   const data = getEnvironmentById(id);
